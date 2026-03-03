@@ -1,0 +1,176 @@
+{
+  "name": "vscode-todolist",
+  "displayName": "MyTodoList",
+  "description": "Track your current task and manage your to-do list directly inside VS Code.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "todo",
+    "task",
+    "productivity"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mytodolist",
+          "title": "MyTodoList",
+          "icon": "resources/icons/todolist.svg"
+        }
+      ]
+    },
+    "views": {
+      "mytodolist": [
+        {
+          "id": "mytodolist.todoView",
+          "name": "Tasks",
+          "icon": "resources/icons/todolist.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "mytodolist.addTodo",
+        "title": "Add Task",
+        "icon": "$(add)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.editTodo",
+        "title": "Edit Task",
+        "icon": "$(edit)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.deleteTodo",
+        "title": "Delete Task",
+        "icon": "$(trash)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.setInProgress",
+        "title": "Set In Progress",
+        "icon": "$(play)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.markDone",
+        "title": "Mark as Done",
+        "icon": "$(check)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.markPending",
+        "title": "Mark as Pending",
+        "icon": "$(circle-outline)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.clearDone",
+        "title": "Clear Completed Tasks",
+        "icon": "$(clear-all)",
+        "category": "MyTodoList"
+      },
+      {
+        "command": "mytodolist.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)",
+        "category": "MyTodoList"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "mytodolist.addTodo",
+          "when": "view == mytodolist.todoView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mytodolist.clearDone",
+          "when": "view == mytodolist.todoView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "mytodolist.refresh",
+          "when": "view == mytodolist.todoView",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "mytodolist.setInProgress",
+          "when": "view == mytodolist.todoView && viewItem == pending || view == mytodolist.todoView && viewItem == done",
+          "group": "inline@1"
+        },
+        {
+          "command": "mytodolist.markDone",
+          "when": "view == mytodolist.todoView && viewItem == inProgress || view == mytodolist.todoView && viewItem == pending",
+          "group": "inline@2"
+        },
+        {
+          "command": "mytodolist.markPending",
+          "when": "view == mytodolist.todoView && viewItem == done || view == mytodolist.todoView && viewItem == inProgress",
+          "group": "inline@3"
+        },
+        {
+          "command": "mytodolist.editTodo",
+          "when": "view == mytodolist.todoView",
+          "group": "inline@4"
+        },
+        {
+          "command": "mytodolist.deleteTodo",
+          "when": "view == mytodolist.todoView",
+          "group": "inline@5"
+        },
+        {
+          "command": "mytodolist.setInProgress",
+          "when": "view == mytodolist.todoView && viewItem == pending || view == mytodolist.todoView && viewItem == done",
+          "group": "1_status@1"
+        },
+        {
+          "command": "mytodolist.markDone",
+          "when": "view == mytodolist.todoView && viewItem == inProgress || view == mytodolist.todoView && viewItem == pending",
+          "group": "1_status@2"
+        },
+        {
+          "command": "mytodolist.markPending",
+          "when": "view == mytodolist.todoView && viewItem == done || view == mytodolist.todoView && viewItem == inProgress",
+          "group": "1_status@3"
+        },
+        {
+          "command": "mytodolist.editTodo",
+          "when": "view == mytodolist.todoView",
+          "group": "2_edit@1"
+        },
+        {
+          "command": "mytodolist.deleteTodo",
+          "when": "view == mytodolist.todoView",
+          "group": "2_edit@2"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts --fix"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.x",
+    "@typescript-eslint/parser": "^6.x",
+    "eslint": "^8.x",
+    "typescript": "^5.x"
+  }
+}
