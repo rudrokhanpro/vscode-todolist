@@ -3,6 +3,10 @@
   "displayName": "MyTodoList",
   "description": "Track your current task and manage your to-do list directly inside VS Code.",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rudrokhanpro/vscode-todolist"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
